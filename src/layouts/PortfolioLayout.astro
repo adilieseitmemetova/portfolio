@@ -23,6 +23,33 @@ const { t } = Astro.props;
 			}
 			window.addEventListener('load', () => {
 				window.scrollTo(0, 0);
+
+				const codeEl = document.querySelector('.hero-subtitle-code');
+				if (!codeEl) return;
+
+				const prefersReducedMotion =
+					window.matchMedia &&
+					window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+				if (prefersReducedMotion) return;
+
+				const fullText = (codeEl.textContent || '').trim();
+				codeEl.textContent = '';
+
+				let index = 0;
+				const typeSpeed = 90;
+				const startDelay = 1800;
+
+				const typeNext = () => {
+					if (index > fullText.length) return;
+					codeEl.textContent = fullText.slice(0, index);
+					index += 1;
+					if (index <= fullText.length) {
+						setTimeout(typeNext, typeSpeed);
+					}
+				};
+
+				setTimeout(typeNext, startDelay);
 			});
 		</script>
 	</head>
@@ -316,8 +343,11 @@ const { t } = Astro.props;
 				display: inline-block;
 				opacity: 0;
 				transform: translateY(24px);
-				animation: heroFadeUp 0.55s ease-out forwards;
-				animation-delay: 1.8s;
+				border-right: 0.08em solid currentColor;
+				animation:
+					heroFadeUp 0.55s ease-out forwards,
+					caretBlink 1s step-end infinite;
+				animation-delay: 1.8s, 2.4s;
 			}
 
 			.hero-location {
@@ -351,6 +381,17 @@ const { t } = Astro.props;
 				to {
 					opacity: 1;
 					transform: translateY(0);
+				}
+			}
+
+			@keyframes caretBlink {
+				from,
+				to {
+					border-color: transparent;
+				}
+
+				50% {
+					border-color: currentColor;
 				}
 			}
 
