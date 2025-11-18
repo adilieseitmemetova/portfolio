@@ -17,6 +17,14 @@ const { t } = Astro.props;
 			href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap"
 			rel="stylesheet"
 		/>
+		<script is:inline>
+			if ('scrollRestoration' in history) {
+				history.scrollRestoration = 'manual';
+			}
+			window.addEventListener('load', () => {
+				window.scrollTo(0, 0);
+			});
+		</script>
 	</head>
 	<body>
 		<header class="site-header">
@@ -37,6 +45,7 @@ const { t } = Astro.props;
 			<section class="hero">
 				<div class="container hero-content">
 					<div class="hero-inner">
+						<span class="hero-badge">AI lover</span>
 						<h1 class="hero-title">{t.heroTitle}</h1>
 						<p class="hero-subtitle">
 							<span class="hero-subtitle-main">
@@ -222,13 +231,57 @@ const { t } = Astro.props;
 				font-size: clamp(2.5rem, 6vw, 3.5rem);
 				font-weight: 700;
 				margin: 0;
+				opacity: 0;
+				transform: translateY(24px);
+				animation: heroFadeUp 0.6s ease-out forwards;
+				animation-delay: 0.1s;
+			}
+
+			.hero-badge {
+				position: relative;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.15rem 0.8rem;
+				border-radius: 999px;
+				font-size: 0.65rem;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				margin-bottom: 1.1rem;
+				opacity: 0;
+				transform: translateY(-24px) scale(0.85);
+				transform-origin: center;
+				background: linear-gradient(135deg, #6366f1, #ec4899, #f97316);
+				background-size: 220% 220%;
+				animation:
+					heroBadgeMagnet 0.8s cubic-bezier(0.22, 1, 0.36, 1) 3.1s forwards,
+					heroBadgeGradient 6s ease-in-out 3.9s infinite alternate;
+				color: #ffffff;
+				border: 1px solid rgba(255, 255, 255, 0.6);
+				box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+				overflow: hidden;
+				white-space: nowrap;
+			}
+
+			.hero-badge::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(
+					circle at 0 0,
+					rgba(255, 255, 255, 0.7),
+					transparent 60%
+				);
+				mix-blend-mode: screen;
+				opacity: 0.9;
 			}
 
 			.hero-subtitle {
-				margin-top: 0.75rem;
+				margin-top: 0;
 				font-size: clamp(2.5rem, 6vw, 3.5rem);
 				color: #000000;
 				white-space: nowrap;
+				margin-bottom: 1rem;
 			}
 
 			.hero-subtitle-main {
@@ -237,25 +290,45 @@ const { t } = Astro.props;
 				font-weight: 400;
 				letter-spacing: 0;
 				font-size: 1.3em;
+				display: inline-block;
+				opacity: 0;
+				transform: translateY(24px);
+				animation: heroFadeUp 0.55s ease-out forwards;
+				animation-delay: 0.8s;
 			}
 
 			.hero-subtitle-connector {
 				margin-left: 0.4em;
 				color: #000000;
 				font-weight: 700;
+				display: inline-block;
+				opacity: 0;
+				transform: translateY(24px);
+				animation: heroFadeUp 0.55s ease-out forwards;
+				animation-delay: 1.3s;
 			}
 
 			.hero-subtitle-code {
-				margin-left: 0.4em;
+				margin-left: 0.1em;
 				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 					'Liberation Mono', 'Courier New', monospace;
 				font-size: 0.9em;
+				display: inline-block;
+				opacity: 0;
+				transform: translateY(24px);
+				animation: heroFadeUp 0.55s ease-out forwards;
+				animation-delay: 1.8s;
 			}
 
 			.hero-location {
-				margin-top: 0.5rem;
-				font-size: 0.95rem;
-				color: #000000;
+				margin-top: 0.25rem;
+				font-size: 1.1rem;
+				font-weight: 300;
+				color: gray;
+				opacity: 0;
+				transform: translateY(24px);
+				animation: heroFadeUp 0.6s ease-out forwards;
+				animation-delay: 2.4s;
 			}
 
 			.hero-actions {
@@ -263,6 +336,60 @@ const { t } = Astro.props;
 				justify-content: center;
 				gap: 1rem;
 				margin-top: 1.75rem;
+				opacity: 0;
+				transform: translateY(24px);
+				animation: heroFadeUp 0.6s ease-out forwards;
+				animation-delay: 2.4s;
+			}
+
+			@keyframes heroFadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(24px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes heroBadgeMagnet {
+				0% {
+					opacity: 0;
+					transform: translateY(-40px) scale(0.9);
+				}
+
+				60% {
+					opacity: 1;
+					transform: translateY(0) scale(1.12);
+				}
+
+				80% {
+					transform: translateY(-3px) scale(0.96);
+				}
+
+				100% {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+				}
+			}
+
+			@keyframes heroBadgeGradient {
+				0% {
+					background-position: 0% 50%;
+					box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+				}
+
+				50% {
+					background-position: 100% 50%;
+					box-shadow: 0 14px 30px rgba(15, 23, 42, 0.26);
+				}
+
+				100% {
+					background-position: 0% 50%;
+					box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+				}
 			}
 
 		.btn {
@@ -282,12 +409,12 @@ const { t } = Astro.props;
 		}
 
 		.btn.primary {
-			background: #ffffff;
-			color: #000000;
+			background: #000000;
+			color: #ffffff;
 		}
 
 		.btn.primary:hover {
-			background: #e5e7eb;
+			background: #111827;
 		}
 
 		.btn.secondary {
@@ -380,6 +507,21 @@ const { t } = Astro.props;
 			align-items: center;
 			justify-content: center;
 			padding: 1.5rem 0;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.hero-title,
+			.hero-subtitle,
+			.hero-subtitle-main,
+			.hero-subtitle-connector,
+			.hero-subtitle-code,
+			.hero-location,
+			.hero-actions,
+			.hero-badge {
+				animation: none !important;
+				opacity: 1 !important;
+				transform: none !important;
+			}
 		}
 
 		@media (max-width: 640px) {
