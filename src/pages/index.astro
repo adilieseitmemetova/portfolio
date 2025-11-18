@@ -1,16 +1,41 @@
 ---
+import PortfolioLayout from '../layouts/PortfolioLayout.astro';
 
+const t = {
+	metaTitle: 'Portfolio | Adilie',
+	metaDescription:
+		'Personal portfolio website of Adilie, web developer. Showcase of projects, skills, and contact information.',
+	logo: 'Adilie',
+	navHome: 'Home',
+	navAbout: 'About',
+	navProjects: 'Projects',
+	navContact: 'Contact',
+	languageLabel: 'Language',
+	heroTitle: "Hi, I'm Adilie.",
+	heroSubtitleMain: 'Product designer',
+	heroSubtitleConnector: 'who',
+	heroSubtitleCode: 'codes.',
+	heroLocation: 'Based in La Rochelle, France, open to remote opportunities.',
+	heroPrimaryCta: 'View projects',
+	heroSecondaryCta: 'Contact me',
+	aboutTitle: 'About',
+	aboutText:
+		"This is a starter portfolio page built with Astro. Replace this text with a short introduction about who you are, what you do, and what kind of work you are looking for.",
+	projectsTitle: 'Projects',
+	projectsIntro:
+		'Here you can highlight a few key projects that represent your skills and interests. Each project can link to a live demo or a GitHub repository.',
+	projectExampleTitle: 'Example Project',
+	projectExampleDescription:
+		'A simple project card as a placeholder. Replace this with one of your real projects: describe your role, technologies used, and the impact.',
+	contactTitle: 'Contact',
+	contactText:
+		'Ready to start a new project or have a question? Add your contact details here so people can reach out to you easily.',
+	contactEmailLabel: 'Email',
+	contactEmailPlaceholder: 'you@example.com',
+	contactLocationLabel: 'Location',
+	contactLocationPlaceholder: 'Your City, Country',
+	footerCopyright: '© ' + new Date().getFullYear() + ' Adilie. All rights reserved.',
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<PortfolioLayout t={t} />
