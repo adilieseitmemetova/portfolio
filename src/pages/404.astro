@@ -1,0 +1,48 @@
+---
+import '../styles/portfolio.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+Astro.response.status = 404;
+
+const metaTitle = '404 – Page not found | Adilie';
+const metaDescription =
+	"The page you’re looking for doesn’t exist or has been moved.";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{metaTitle}</title>
+		<meta name="description" content={metaDescription} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="page-404">
+		<SiteHeader logoLabel="Adilie" />
+
+		<main class="section page-404-main">
+			<div class="container page-404-content">
+				<h1 class="section-title">Page not found</h1>
+				<p class="section-text">
+					The page you’re looking for doesn’t exist, or has been
+					moved.
+				</p>
+				<p>
+					<a href="/" class="btn primary">Back to home</a>
+				</p>
+			</div>
+		</main>
+
+		<SiteFooter
+			copyright={`© ${new Date().getFullYear()} Adilie. All rights reserved.`}
+		/>
+	</body>
+</html>

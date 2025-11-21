@@ -1,8 +1,18 @@
 ---
 import Project from '../components/Project.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/portfolio.css';
 
+type Study = {
+	title: string;
+	description: string;
+};
+
 const { t } = Astro.props;
+const studies: Study[] = Array.isArray((t as any).studies)
+	? ((t as any).studies as Study[])
+	: [];
 ---
 
 <!DOCTYPE html>
@@ -10,7 +20,7 @@ const { t } = Astro.props;
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{t.metaTitle}</title>
 		<meta name="description" content={t.metaDescription} />
@@ -64,19 +74,15 @@ const { t } = Astro.props;
 		</script>
 	</head>
 	<body>
-		<header class="site-header">
-			<div class="container header-content">
-				<a href="/" class="logo">
-					<span>{t.logo}</span>
-				</a>
-				<nav class="nav">
-					<a href="#home">{t.navHome}</a>
-					<a href="#about">{t.navAbout}</a>
-					<a href="#projects">{t.navProjects}</a>
-					<a href="#contact">{t.navContact}</a>
-				</nav>
-			</div>
-		</header>
+		<SiteHeader
+			logoLabel={t.logo}
+			nav={{
+				home: t.navHome,
+				projects: t.navProjects,
+				about: t.navAbout,
+				contact: t.navContact,
+			}}
+		/>
 
 		<main id="home">
 			<section class="hero">
@@ -160,6 +166,23 @@ const { t } = Astro.props;
 				<div class="container">
 					<h2 class="section-title">{t.aboutTitle}</h2>
 					<p class="section-text">{t.aboutText}</p>
+					{studies.length > 0 && (
+						<div class="about-studies">
+							<h3 class="about-subtitle">{t.studiesTitle}</h3>
+							<ul class="about-studies-list">
+								{studies.map((item: Study) => (
+									<li class="about-studies-item">
+										<div class="about-studies-item-title">
+											{item.title}
+										</div>
+										<div class="about-studies-item-detail">
+											{item.description}
+										</div>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
 				</div>
 			</section>
 
@@ -172,19 +195,11 @@ const { t } = Astro.props;
 							<strong>{t.contactEmailLabel}</strong>
 							<span>{t.contactEmailPlaceholder}</span>
 						</li>
-						<li>
-							<strong>{t.contactLocationLabel}</strong>
-							<span>{t.contactLocationPlaceholder}</span>
-						</li>
 					</ul>
 				</div>
 			</section>
 		</main>
 
-		<footer class="site-footer">
-			<div class="container footer-content">
-				<p>{t.footerCopyright}</p>
-			</div>
-		</footer>
+		<SiteFooter copyright={t.footerCopyright} />
 	</body>
 </html>

@@ -1,8 +1,11 @@
 ---
+import '../styles/../styles/portfolio.css';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+
 const pageTitle = 'shaaare – Case Study';
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -10,13 +13,22 @@ const pageTitle = 'shaaare – Case Study';
 		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<main>
-			<h1>{pageTitle}</h1>
-			<p>This is a placeholder page for the shaaare project.</p>
-			<p>
-				<a href="/">Back to portfolio</a>
-			</p>
+		<SiteHeader logoLabel="Adilie" />
+
+		<main class="section">
+			<div class="container">
+				<h1 class="section-title">{pageTitle}</h1>
+				<p class="section-text">
+					This is a placeholder page for the shaaare project.
+				</p>
+				<p>
+					<a href="/" class="btn secondary">Back to portfolio</a>
+				</p>
+			</div>
 		</main>
+
+		<SiteFooter
+			copyright={`© ${new Date().getFullYear()} Adilie. All rights reserved.`}
+		/>
 	</body>
 </html>
-
