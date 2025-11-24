@@ -1,9 +1,10 @@
 ---
-import '../styles/../styles/portfolio.css';
-import SiteHeader from '../../components/SiteHeader.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
+import "../../styles/portfolio.css";
+import "../../styles/dysg.css";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
 
-const pageTitle = 'Eatcue – Case Study';
+const pageTitle = "DYSG Project";
 ---
 
 <html lang="en">
@@ -11,19 +12,173 @@ const pageTitle = 'Eatcue – Case Study';
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{pageTitle}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
-	<body>
-		<SiteHeader logoLabel="Adilie" />
+	<body class="dysg-page">
+		<SiteHeader logoLabel="Adilie" transparent={true} />
 
-		<main class="section">
-			<div class="container">
-				<h1 class="section-title">{pageTitle}</h1>
-				<p class="section-text">
-					This is a placeholder page for the Eatcue project.
-				</p>
-				<p>
-					<a href="/" class="btn secondary">Back to portfolio</a>
-				</p>
+		<main>
+			<!-- Hero Section -->
+			<section class="dysg-hero">
+				<div class="dysg-hero-video-container">
+					<video
+						class="dysg-hero-video"
+						autoplay
+						loop
+						muted
+						playsinline
+						poster="/images/dysg/DYSG_cover.jpg"
+					>
+						<source
+							src="/images/dysg/hero_video.webm"
+							type="video/webm"
+						/>
+						<source
+							src="/images/dysg/hero_video_optimized.mp4"
+							type="video/mp4"
+						/>
+					</video>
+				</div>
+
+				<div class="dysg-hero-content">
+					<h1 class="dysg-title">DYSG</h1>
+					<p class="dysg-subtitle">
+						High-performance social platform engineered for seamless
+						real-time interaction.
+					</p>
+
+					<div class="dysg-stats">
+						<div class="dysg-stat-item">
+							<span class="dysg-stat-value">99.9%</span>
+							<span class="dysg-stat-label">Uptime</span>
+						</div>
+						<div class="dysg-stat-item">
+							<span class="dysg-stat-value">&lt;100ms</span>
+							<span class="dysg-stat-label">Latency</span>
+						</div>
+						<div class="dysg-stat-item">
+							<span class="dysg-stat-value">10k+</span>
+							<span class="dysg-stat-label">Concurrent Users</span
+							>
+						</div>
+						<div class="dysg-stat-item">
+							<span class="dysg-stat-value">PWA</span>
+							<span class="dysg-stat-label">Native-like Exp</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Tech Stack -->
+			<section class="dysg-tech-section">
+				<div class="dysg-tech-container">
+					<h2 class="dysg-tech-title">Technologies & Architecture</h2>
+					<div class="dysg-tech-grid">
+						<span class="dysg-tech-item">React</span>
+						<span class="dysg-tech-item">TypeScript</span>
+						<span class="dysg-tech-item">Node.js</span>
+						<span class="dysg-tech-item">GraphQL</span>
+						<span class="dysg-tech-item">PostgreSQL</span>
+						<span class="dysg-tech-item">Redis</span>
+						<span class="dysg-tech-item">AWS</span>
+						<span class="dysg-tech-item">Docker</span>
+						<span class="dysg-tech-item">CI/CD</span>
+					</div>
+				</div>
+			</section>
+
+			<!-- Project Info -->
+			<section class="dysg-info-section">
+				<div class="dysg-info-grid">
+					<div class="dysg-info-block">
+						<h2>The Challenge</h2>
+						<p>
+							The core challenge was to build a scalable
+							architecture capable of handling thousands of
+							concurrent connections while maintaining low
+							latency. We needed to ensure data consistency across
+							devices in real-time and optimize the application
+							bundle for performance on varying network
+							conditions.
+						</p>
+					</div>
+					<div class="dysg-info-block">
+						<h2>The Solution</h2>
+						<p>
+							I implemented a microservices architecture using
+							Node.js and Docker to decouple services and ensure
+							independent scalability. By leveraging Redis for
+							caching and WebSockets for real-time updates, we
+							achieved sub-100ms latency. The frontend was
+							optimized with code-splitting and server-side
+							rendering (SSR) to ensure instant initial load
+							times.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Media Showcase -->
+			<section class="dysg-media-section">
+				<div class="dysg-media-grid">
+					<!-- Hero Image -->
+					<div class="dysg-media-item full-width">
+						<img
+							src="/images/dysg/DYSG_cover.jpg"
+							alt="DYSG App Interface Overview"
+							loading="lazy"
+						/>
+					</div>
+
+					<!-- Placeholder Images - User to replace -->
+					<div class="dysg-media-item">
+						<img
+							src="https://placehold.co/800x600/f0f0f0/1a1a1a?text=Architecture+Diagram"
+							alt="System Architecture"
+							loading="lazy"
+						/>
+					</div>
+					<div class="dysg-media-item">
+						<img
+							src="https://placehold.co/800x600/1a1a1a/ffffff?text=Code+Snippet"
+							alt="Core Logic Implementation"
+							loading="lazy"
+						/>
+					</div>
+
+					<div class="dysg-media-item full-width">
+						<img
+							src="https://placehold.co/1600x900/e4e4e7/1a1a1a?text=Performance+Dashboard"
+							alt="Performance Metrics"
+							loading="lazy"
+						/>
+					</div>
+
+					<div class="dysg-media-item">
+						<img
+							src="https://placehold.co/800x800/eb5e28/ffffff?text=API+Structure"
+							alt="API Design"
+							loading="lazy"
+						/>
+					</div>
+					<div class="dysg-media-item">
+						<img
+							src="https://placehold.co/800x800/ffffff/1a1a1a?text=Database+Schema"
+							alt="Database Schema"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+			</section>
+
+			<!-- Navigation -->
+			<div class="dysg-nav">
+				<a href="/" class="btn secondary">Back to portfolio</a>
 			</div>
 		</main>
 
