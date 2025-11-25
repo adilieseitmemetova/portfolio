@@ -1,8 +1,15 @@
 ---
-import '../styles/project.css';
+import "../styles/project.css";
 
-const { title, dates, description, tags = [], imageSrc, imageAlt, href } =
-	Astro.props;
+const {
+	title,
+	dates,
+	description,
+	tags = [],
+	imageSrc,
+	imageAlt,
+	href,
+} = Astro.props;
 ---
 
 <div class="project-showcase-inner">
@@ -15,19 +22,33 @@ const { title, dates, description, tags = [], imageSrc, imageAlt, href } =
 			<h2 class="project-name">{title}</h2>
 			<p class="project-description">{description}</p>
 		</div>
-		{tags && tags.length > 0 && (
-			<div class="project-tags">
-				{tags.map((tag) => (
-					<span class="project-tag">{tag}</span>
-				))}
-			</div>
-		)}
+		{
+			tags && tags.length > 0 && (
+				<div class="project-tags">
+					{tags.map((tag) => (
+						<span class="project-tag">{tag}</span>
+					))}
+				</div>
+			)
+		}
 	</div>
 	<div class="project-media">
-		<a href={href} class="project-media-link" aria-label={`Open project ${title}`}>
-			<div class="project-media-frame">
-				<img src={imageSrc} alt={imageAlt} loading="lazy" />
-			</div>
-		</a>
+		{
+			href ? (
+				<a
+					href={href}
+					class="project-media-link"
+					aria-label={`Open project ${title}`}
+				>
+					<div class="project-media-frame">
+						<img src={imageSrc} alt={imageAlt} loading="lazy" />
+					</div>
+				</a>
+			) : (
+				<div class="project-media-frame">
+					<img src={imageSrc} alt={imageAlt} loading="lazy" />
+				</div>
+			)
+		}
 	</div>
 </div>

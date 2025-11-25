@@ -1,0 +1,101 @@
+---
+import PortfolioLayout from "../../layouts/PortfolioLayout.astro";
+
+const t = {
+    metaTitle: "Portfolio | Adilie",
+    metaDescription:
+        "Portfolio personnel d'Adilie, développeuse web. Présentation de projets, compétences et informations de contact.",
+    logo: "Adilie",
+    navHome: "Accueil",
+    navAbout: "À propos",
+    navProjects: "Projets",
+    navContact: "Contact",
+    languageLabel: "EN",
+    heroBadge: "Fan d'IA",
+    heroTitle: "Bonjour, je suis Adilie.",
+    heroSubtitleMain: "Product designer",
+    heroSubtitleConnector: "qui",
+    heroSubtitleCode: "code.",
+    heroLocation:
+        "Basée à La Rochelle, France, ouverte aux opportunités en télétravail.",
+    heroPrimaryCta: "Voir les projets",
+    heroSecondaryCta: "Me contacter",
+    aboutTitle: "À propos",
+    aboutText:
+        "Je suis product designer avec plus de sept ans d'expérience et une approche pratique de la création de produits numériques. Je conçois, je code, je communique — et je concrétise les choses.",
+    studiesTitle: "Études",
+    studies: [
+        {
+            title: "Développement UX, Web et mobile",
+            description: "Webstart, Paris, France – 2018",
+        },
+        {
+            title: "Design produit",
+            description: "MJM Graphic Design, Paris, France – 2017",
+        },
+        {
+            title: "Design graphique",
+            description: "MJM Graphic Design, Paris, France – 2016",
+        },
+        {
+            title: "Ingénieur civil",
+            description:
+                "Académie nationale de construction environnementale et de villégiature, Ukraine – 2009",
+        },
+    ],
+    projectsTitle: "Projets",
+    projects: [
+        {
+            title: "Jean Paul Gaultier",
+            dates: "Marque de luxe",
+            description:
+                "Campagne interactive réalisée avec Webflow et un flux de travail vidéo personnalisé alimenté par l'IA. J'étais responsable du design produit et de l'implémentation front-end, offrant une expérience multilingue fluide dans huit langues.",
+            tags: ["Product Design", "Webflow", "Front-end"],
+            imageSrc: "/images/dysg/DYSG_cover.jpg",
+            imageAlt:
+                "Couverture du produit Eatcue avec interface d'application mobile",
+        },
+        {
+            title: "SHAAARE",
+            dates: "Canal marketing",
+            description:
+                "Un nouveau canal marketing où les utilisateurs gagnent des récompenses des marques en partageant du contenu engageant. J'ai conçu l'expérience complète de l'application mobile pour iOS et Android.",
+            tags: ["Product Design", "Mobile", "Branding"],
+            imageSrc: "/images/shaaare/shaaare_cover.jpg",
+            imageAlt: "Couverture du projet shaaare",
+        },
+        {
+            title: "IK-Generator",
+            dates: "SaaS",
+            description:
+                "Mon propre produit SaaS, entièrement conçu et construit de bout en bout, identité de marque, design produit, développement et SEO, maintenant utilisé par un nombre croissant de clients.",
+            tags: ["Product Design", "Branding", "SEO"],
+            imageSrc: "/images/ik-generator/ik-generator_cover.jpg",
+            imageAlt: "Couverture du projet ik-generator",
+        },
+        {
+            title: "Ko Social Network",
+            dates: "Réseau social Web3",
+            description:
+                "Un réseau social convivial basé sur la technologie blockchain. J'ai conçu toute l'expérience mobile pour iOS et Android, en me concentrant sur la simplicité et l'intuitivité des interactions blockchain.",
+            tags: ["Product Design", "Mobile", "Web3"],
+            imageSrc: "/images/ko_social_network/ksn_cover.jpg",
+            imageAlt: "Couverture du projet ko social network",
+        },
+    ],
+    contactTitle: "Contact",
+    contactText:
+        "Créons quelque chose de grand ensemble — envoyez-moi un message ou appelez-moi.",
+    contactEmailLabel: "Email",
+    contactEmail: "adilie.seitmemetova@smartness.co",
+    contactPhoneLabel: "Téléphone",
+    contactPhone: "+33650385967",
+    contactRevealEmail: "Voir l'email",
+    contactRevealPhone: "Voir le téléphone",
+    contactSocialTitle: "Connectez-vous avec moi",
+    qrModalTitleWhatsapp: "Scannez pour discuter sur WhatsApp",
+    qrModalTitleTelegram: "Scannez pour discuter sur Telegram",
+};
+---
+
+<PortfolioLayout t={t} currentLang="fr" />

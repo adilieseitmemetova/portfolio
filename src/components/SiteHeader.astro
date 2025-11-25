@@ -1,5 +1,10 @@
 ---
-const { logoLabel = "Adilie", nav, transparent = false } = Astro.props;
+const {
+	logoLabel = "Adilie",
+	nav,
+	transparent = false,
+	currentLang = "en",
+} = Astro.props;
 ---
 
 <header class:list={["site-header", { "is-transparent": transparent }]}>
@@ -9,13 +14,35 @@ const { logoLabel = "Adilie", nav, transparent = false } = Astro.props;
 		</a>
 		{
 			nav && (
-				<nav class="nav">
-					<a href="#home">{nav.home}</a>
-					<a href="#projects">{nav.projects}</a>
-					<a href="#about">{nav.about}</a>
-					<a href="#contact">{nav.contact}</a>
-				</nav>
+				<div class="header-actions">
+					<nav class="nav">
+						<a href="#home">{nav.home}</a>
+						<a href="#projects">{nav.projects}</a>
+						<a href="#about">{nav.about}</a>
+						<a href="#contact">{nav.contact}</a>
+					</nav>
+				</div>
 			)
 		}
+		<div class="lang-switcher">
+			<a
+				href="/"
+				class:list={[
+					"lang-link",
+					{ "is-active": currentLang === "en" },
+				]}
+			>
+				EN
+			</a>
+			<a
+				href="/fr"
+				class:list={[
+					"lang-link",
+					{ "is-active": currentLang === "fr" },
+				]}
+			>
+				FR
+			</a>
+		</div>
 	</div>
 </header>

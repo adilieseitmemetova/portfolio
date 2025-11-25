@@ -1,11 +1,10 @@
 ---
-import '../styles/portfolio.css';
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
+import "../styles/portfolio.css";
+import SiteHeader from "../components/SiteHeader.astro";
 
 Astro.response.status = 404;
 
-const metaTitle = '404 – Page not found | Adilie';
+const metaTitle = "404 – Page not found | Adilie";
 const metaDescription =
 	"The page you’re looking for doesn’t exist or has been moved.";
 ---
@@ -40,9 +39,5 @@ const metaDescription =
 				</p>
 			</div>
 		</main>
-
-		<SiteFooter
-			copyright={`© ${new Date().getFullYear()} Adilie. All rights reserved.`}
-		/>
 	</body>
 </html>

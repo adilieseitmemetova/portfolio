@@ -1,58 +1,98 @@
 ---
-import PortfolioLayout from '../layouts/PortfolioLayout.astro';
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 
 const t = {
-	metaTitle: 'Portfolio | Adilie',
+	metaTitle: "Portfolio | Adilie",
 	metaDescription:
-		'Personal portfolio website of Adilie, web developer. Showcase of projects, skills, and contact information.',
-	logo: 'Adilie',
-	navHome: 'Home',
-	navAbout: 'About',
-	navProjects: 'Projects',
-	navContact: 'Contact',
-	languageLabel: 'Language',
+		"Personal portfolio website of Adilie, web developer. Showcase of projects, skills, and contact information.",
+	logo: "Adilie",
+	navHome: "Home",
+	navAbout: "About",
+	navProjects: "Projects",
+	navContact: "Contact",
+	languageLabel: "FR",
+	heroBadge: "AI lover",
 	heroTitle: "Hi, I'm Adilie.",
-	heroSubtitleMain: 'Product designer',
-	heroSubtitleConnector: 'who',
-	heroSubtitleCode: 'codes.',
-	heroLocation: 'Based in La Rochelle, France, open to remote opportunities.',
-	heroPrimaryCta: 'View projects',
-	heroSecondaryCta: 'Contact me',
-	aboutTitle: 'About',
+	heroSubtitleMain: "Product designer",
+	heroSubtitleConnector: "who",
+	heroSubtitleCode: "codes.",
+	heroLocation: "Based in La Rochelle, France, open to remote opportunities.",
+	heroPrimaryCta: "View projects",
+	heroSecondaryCta: "Contact me",
+	aboutTitle: "About",
 	aboutText:
-		"I’m a product designer with over seven years of experience and a hands-on approach to building digital products. I code, I design, I communicate — and I make things happen.",
-	studiesTitle: 'Studies',
+		"I’m a product designer with over seven years of experience and a hands-on approach to building digital products. I design, I code, I communicate — and I make things happen.",
+	studiesTitle: "Studies",
 	studies: [
 		{
-			title: 'UX, Web and mobile development',
-			description: 'Webstart, Paris, France – 2018',
+			title: "UX, Web and mobile development",
+			description: "Webstart, Paris, France – 2018",
 		},
 		{
-			title: 'Product design',
-			description: 'MJM Graphic Design, Paris, France – 2017',
+			title: "Product design",
+			description: "MJM Graphic Design, Paris, France – 2017",
 		},
 		{
-			title: 'Graphic design',
-			description: 'MJM Graphic Design, Paris, France – 2016',
+			title: "Graphic design",
+			description: "MJM Graphic Design, Paris, France – 2016",
 		},
 		{
-			title: 'Civil engineer',
+			title: "Civil engineer",
 			description:
-				'National Academy of Environmental and Resort Construction, Ukraine – 2009',
+				"National Academy of Environmental and Resort Construction, Ukraine – 2009",
 		},
 	],
-	projectsTitle: 'Projects',
-	projectFeaturedTitle: 'Eatcue',
-	projectFeaturedDates: 'Dec 2023 \u2013 Mar 2024',
-	projectFeaturedDescription:
-		'An app that helps users solve their desire to eat healthily on a budget.',
-	projectFeaturedTags: ['Product Design', 'Mobile App', 'End-to-end'],
-	contactTitle: 'Contact',
+	projectsTitle: "Projects",
+	projects: [
+		{
+			title: "Jean Paul Gaultier",
+			dates: "Luxury Brand",
+			description:
+				"Interactive campaign built using Webflow and a custom AI-powered video workflow. I was responsible for the product design and the front-end implementation, delivering a smooth multilingual experience across eight languages.",
+			tags: ["Product Design", "Webflow", "Front-end"],
+			imageSrc: "/images/dysg/DYSG_cover.jpg",
+			imageAlt: "Eatcue product cover with mobile app interface",
+		},
+		{
+			title: "SHAAARE",
+			dates: "Marketing Channel",
+			description:
+				"A new marketing channel where users earn rewards from brands by sharing engaging content. I designed the full mobile application experience for iOS and Android.",
+			tags: ["Product Design", "Mobile", "Branding"],
+			imageSrc: "/images/shaaare/shaaare_cover.jpg",
+			imageAlt: "Placeholder cover for shaaare project",
+		},
+		{
+			title: "IK-Generator",
+			dates: "SaaS",
+			description:
+				"My own SaaS product, fully designed and built end-to-end, brand identity, product design, development, and SEO, now used by a growing number of clients.",
+			tags: ["Product Design", "Branding", "SEO"],
+			imageSrc: "/images/ik-generator/ik-generator_cover.jpg",
+			imageAlt: "Placeholder cover for ik-generator project",
+		},
+		{
+			title: "Ko Social Network",
+			dates: "Social Network Web3",
+			description:
+				"A user-friendly social network built on blockchain technology. I designed the entire mobile experience for iOS and Android, focusing on making blockchain interactions simple and intuitive.",
+			tags: ["Product Design", "Mobile", "Web3"],
+			imageSrc: "/images/ko_social_network/ksn_cover.jpg",
+			imageAlt: "Placeholder cover for ko social network project",
+		},
+	],
+	contactTitle: "Contact",
 	contactText:
-		'Let’s build something great together — drop me a message.',
-	contactEmailLabel: 'Email',
-	contactEmailPlaceholder: 'adilie.seitmemetova@smartness.co',
-	footerCopyright: '© ' + new Date().getFullYear() + ' Adilie. All rights reserved.',
+		"Let's build something great together — drop me a message, or call me.",
+	contactEmailLabel: "Email",
+	contactEmail: "adilie.seitmemetova@smartness.co",
+	contactPhoneLabel: "Phone",
+	contactPhone: "+33650385967",
+	contactRevealEmail: "Show Email",
+	contactRevealPhone: "Show Phone",
+	contactSocialTitle: "Connect with me",
+	qrModalTitleWhatsapp: "Scan to chat on WhatsApp",
+	qrModalTitleTelegram: "Scan to chat on Telegram",
 };
 ---
 
