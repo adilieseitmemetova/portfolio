@@ -347,7 +347,10 @@ a:hover {
 	transition:
 		background 0.15s ease,
 		color 0.15s ease,
-		border-color 0.15s ease;
+		border-color 0.15s ease,
+		transform 0.18s ease,
+		box-shadow 0.18s ease;
+	transform: translateY(0);
 }
 
 .btn.primary {
@@ -357,6 +360,9 @@ a:hover {
 
 .btn.primary:hover {
 	background: #111827;
+	text-decoration: none;
+	transform: translateY(-2px);
+	box-shadow: 0 12px 30px rgba(17, 24, 39, 0.22);
 }
 
 .btn.secondary {
@@ -365,10 +371,24 @@ a:hover {
 	border-color: rgba(156, 163, 175, 0.6);
 }
 
+.btn.secondary:hover {
+	background: #f3f4f6;
+	color: #000000;
+	border-color: #111827;
+	text-decoration: none;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 24px rgba(17, 24, 39, 0.15);
+}
+
 .section {
 	padding: 3.5rem 0;
 	background: #ffffff;
 	color: #000000;
+}
+
+#about {
+	/* Leave room when scrolling to the anchored section under the sticky header */
+	scroll-margin-top: 96px;
 }
 
 #contact.section {
@@ -392,6 +412,120 @@ a:hover {
 	color: #000000;
 	font-size: 0.95rem;
 	line-height: 1.7;
+}
+
+.cv-section {
+	padding: 3rem 0;
+}
+
+.cv-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+}
+
+.cv-copy {
+	flex: 1;
+	min-width: 240px;
+}
+
+.cv-section .btn {
+	min-width: 220px;
+}
+
+@media (max-width: 640px) {
+	.header-content {
+		gap: 1rem;
+	}
+
+	.nav {
+		display: none;
+	}
+
+	.hero {
+		min-height: auto;
+		padding-top: 4.5rem;
+		padding-bottom: 3rem;
+		align-items: flex-start;
+	}
+
+	.hero-content {
+		max-width: 100%;
+	}
+
+	.hero-title {
+		font-size: 2.1rem;
+	}
+
+	.hero-subtitle {
+		font-size: 1.8rem;
+		white-space: normal;
+	}
+
+	.hero-location {
+		font-size: 0.95rem;
+	}
+
+	.hero-actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.hero-actions .btn {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.cv-inner {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.cv-section .btn {
+		width: 100%;
+		max-width: 320px;
+		justify-content: center;
+	}
+
+	.contact-social-icons {
+		justify-content: center;
+		width: 100%;
+	}
+
+	.contact-reveal-section {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.contact-reveal-item {
+		width: 100%;
+		max-width: 420px;
+		min-width: 100%;
+	}
+
+	.contact-reveal-btn {
+		justify-content: center;
+		text-align: center;
+	}
+
+	.contact-value {
+		text-align: center;
+	}
+
+	.contact-social-section {
+		text-align: center;
+	}
+
+	.lang-switcher {
+		font-size: 0.85rem;
+	}
+
+	.lang-link {
+		padding: 0.35rem 0.75rem;
+	}
 }
 
 .about-studies {
@@ -456,10 +590,12 @@ a:hover {
 }
 
 .contact-reveal-btn:hover {
-	background: #ffffff;
-	border-color: #6366f1;
+	background: #f3f4f6;
+	border-color: #111827;
+	color: #000000;
+	text-decoration: none;
 	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+	box-shadow: 0 10px 24px rgba(17, 24, 39, 0.15);
 }
 
 .contact-icon {
@@ -536,14 +672,14 @@ a:hover {
 }
 
 .social-icon-link:hover {
-	background: #6366f1;
-	border-color: #6366f1;
+	background: #ffffff;
+	border-color: #111827;
 	transform: translateY(-3px) scale(1.05);
-	box-shadow: 0 8px 16px rgba(99, 102, 241, 0.25);
+	box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
 }
 
 .social-icon-link:hover .social-icon {
-	color: #ffffff;
+	color: #000000;
 }
 
 .social-icon {
@@ -701,69 +837,5 @@ a:hover {
 		animation: none !important;
 		opacity: 1 !important;
 		transform: none !important;
-	}
-}
-
-@media (max-width: 640px) {
-	.header-content {
-		gap: 1rem;
-	}
-
-	.nav {
-		display: none;
-	}
-
-	.hero {
-		min-height: auto;
-		padding-top: 4.5rem;
-		padding-bottom: 3rem;
-		align-items: flex-start;
-	}
-
-	.hero-content {
-		max-width: 100%;
-	}
-
-	.hero-title {
-		font-size: 2.1rem;
-	}
-
-	.hero-subtitle {
-		font-size: 1.8rem;
-		white-space: normal;
-	}
-
-	.hero-location {
-		font-size: 0.95rem;
-	}
-
-	.hero-actions {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.hero-actions .btn {
-		width: 100%;
-		max-width: 100%;
-	}
-
-	.contact-reveal-section {
-		flex-direction: column;
-	}
-
-	.contact-reveal-item {
-		min-width: 100%;
-	}
-
-	.contact-social-icons {
-		justify-content: flex-start;
-	}
-
-	.lang-switcher {
-		font-size: 0.85rem;
-	}
-
-	.lang-link {
-		padding: 0.35rem 0.75rem;
 	}
 }

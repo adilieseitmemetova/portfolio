@@ -306,6 +306,20 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 					</div>
 				</div>
 			</section>
+
+			{t.cvLink && (
+				<section id="cv" class="section section-alt cv-section">
+					<div class="container cv-inner">
+						<div class="cv-copy">
+							<h2 class="section-title">{t.cvTitle}</h2>
+							{t.cvText && <p class="section-text">{t.cvText}</p>}
+						</div>
+						<a class="btn primary" href={t.cvLink} download>
+							{t.cvButtonLabel}
+						</a>
+					</div>
+				</section>
+			)}
 		</main>
 
 		<script is:inline define:vars={{ t }}>
