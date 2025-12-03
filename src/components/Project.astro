@@ -9,6 +9,8 @@ const {
 	imageSrc,
 	imageAlt,
 	href,
+	imageWidth = 1600,
+	imageHeight = 900,
 } = Astro.props;
 ---
 
@@ -41,12 +43,24 @@ const {
 					aria-label={`Open project ${title}`}
 				>
 					<div class="project-media-frame">
-						<img src={imageSrc} alt={imageAlt} loading="lazy" />
+						<img
+							src={imageSrc}
+							alt={imageAlt}
+							loading="lazy"
+							width={imageWidth}
+							height={imageHeight}
+						/>
 					</div>
 				</a>
 			) : (
 				<div class="project-media-frame">
-					<img src={imageSrc} alt={imageAlt} loading="lazy" />
+					<img
+						src={imageSrc}
+						alt={imageAlt}
+						loading="lazy"
+						width={imageWidth}
+						height={imageHeight}
+					/>
 				</div>
 			)
 		}

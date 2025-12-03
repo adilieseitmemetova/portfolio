@@ -63,6 +63,55 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 			</>
 		)}
 
+		{hasSiteUrl && (
+			<script type="application/ld+json">
+				{JSON.stringify(
+					{
+						"@context": "https://schema.org",
+						"@type": "Person",
+						name: "Adilie Seitmemetova",
+						jobTitle: "Product Designer",
+						url: canonicalUrl,
+						email: `mailto:${t.contactEmail}`,
+						telephone: t.contactPhone,
+						image: ogImage,
+						sameAs: [
+							"https://www.linkedin.com/in/adilie-seitmemetova-3a4196196/",
+						],
+					},
+					null,
+					2,
+				)}
+			</script>
+		)}
+
+		{hasSiteUrl && (
+			<script type="application/ld+json">
+				{JSON.stringify(
+					{
+						"@context": "https://schema.org",
+						"@type": "BreadcrumbList",
+						itemListElement: [
+							{
+								"@type": "ListItem",
+								position: 1,
+								name: t.navHome,
+								item: canonicalUrl,
+							},
+							{
+								"@type": "ListItem",
+								position: 2,
+								name: t.projectsTitle,
+								item: `${canonicalUrl}#projects`,
+							},
+						],
+					},
+					null,
+					2,
+				)}
+			</script>
+		)}
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -153,7 +202,6 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 			</section>
 
 			<section id="projects" class="project-showcase">
-				<h2 class="sr-only">{t.projectsTitle}</h2>
 				{
 					projects.map((project: any) => (
 						<Project
