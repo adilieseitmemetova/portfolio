@@ -1,0 +1,43 @@
+---
+import "../../styles/portfolio.css";
+import SiteHeader from "../../components/SiteHeader.astro";
+
+Astro.response.status = 404;
+
+const metaTitle = "404 – Page non trouvée | Adilie";
+const metaDescription =
+	"La page que vous cherchez n'existe pas ou a été déplacée.";
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{metaTitle}</title>
+		<meta name="description" content={metaDescription} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="page-404">
+		<SiteHeader logoLabel="Adilie" currentLang="fr" />
+
+		<main class="section page-404-main">
+			<div class="container page-404-content">
+				<h1 class="section-title">Page non trouvée</h1>
+				<p class="section-text">
+					La page que vous cherchez n'existe pas ou a été déplacée.
+				</p>
+				<p>
+					<a href="/fr/" class="btn primary">Retour à l'accueil</a>
+				</p>
+			</div>
+		</main>
+	</body>
+</html>
