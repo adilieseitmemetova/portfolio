@@ -60,12 +60,6 @@ a:hover {
 	color: #000000;
 }
 
-.header-actions {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .logo {
 	font-weight: 600;
 	letter-spacing: 0.08em;
@@ -126,11 +120,6 @@ a:hover {
 	background: #000000;
 	color: white;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.lang-link.is-active:hover {
-	background: #000000;
-	color: white;
 }
 
 .hero {
@@ -391,6 +380,18 @@ a:hover {
 	scroll-margin-top: 96px;
 }
 
+#projects {
+	scroll-margin-top: 96px;
+}
+
+#contact {
+	scroll-margin-top: 96px;
+}
+
+#cv {
+	scroll-margin-top: 96px;
+}
+
 #contact.section {
 	padding-bottom: 7rem;
 }
@@ -438,10 +439,6 @@ a:hover {
 @media (max-width: 640px) {
 	.header-content {
 		gap: 1rem;
-	}
-
-	.nav {
-		display: none;
 	}
 
 	.hero {
@@ -837,5 +834,14 @@ a:hover {
 		animation: none !important;
 		opacity: 1 !important;
 		transform: none !important;
+	}
+
+	/* Disable all transitions and animations */
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
 	}
 }

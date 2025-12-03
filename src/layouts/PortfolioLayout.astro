@@ -14,6 +14,17 @@ const studies: Study[] = Array.isArray((t as any).studies)
 	? ((t as any).studies as Study[])
 	: [];
 const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
+
+// SEO variables
+const siteUrl =
+	typeof Astro.site !== "undefined" && Astro.site
+		? Astro.site.toString().replace(/\/$/, "")
+		: "";
+const hasSiteUrl = Boolean(siteUrl);
+const currentPath = currentLang === "en" ? "/" : `/${currentLang}/`;
+const canonicalUrl = hasSiteUrl ? `${siteUrl}${currentPath}` : currentPath;
+const ogImagePath = "/images/og-image.jpg";
+const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 ---
 
 <!doctype html>
@@ -25,6 +36,33 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 		<meta name="generator" content={Astro.generator} />
 		<title>{t.metaTitle}</title>
 		<meta name="description" content={t.metaDescription} />
+
+		<!-- Canonical URL -->
+		{hasSiteUrl && <link rel="canonical" href={canonicalUrl} />}
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		{hasSiteUrl && <meta property="og:url" content={canonicalUrl} />}
+		<meta property="og:title" content={t.metaTitle} />
+		<meta property="og:description" content={t.metaDescription} />
+		<meta property="og:image" content={ogImage} />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		{hasSiteUrl && <meta name="twitter:url" content={canonicalUrl} />}
+		<meta name="twitter:title" content={t.metaTitle} />
+		<meta name="twitter:description" content={t.metaDescription} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<!-- Language alternates -->
+		{hasSiteUrl && (
+			<>
+				<link rel="alternate" hreflang="en" href={`${siteUrl}/`} />
+				<link rel="alternate" hreflang="fr" href={`${siteUrl}/fr/`} />
+				<link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+			</>
+		)}
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -32,12 +70,7 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 			rel="stylesheet"
 		/>
 		<script is:inline>
-			if ("scrollRestoration" in history) {
-				history.scrollRestoration = "manual";
-			}
 			window.addEventListener("load", () => {
-				window.scrollTo(0, 0);
-
 				const codeEl = document.querySelector(".hero-subtitle-code");
 				if (!codeEl) return;
 
@@ -119,7 +152,7 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 				</div>
 			</section>
 
-			<section id="projects" class="project-showcase">
+				<section id="projects" class="project-showcase">
 				{
 					projects.map((project: any) => (
 						<Project
@@ -129,6 +162,7 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 							tags={project.tags}
 							imageSrc={project.imageSrc}
 							imageAlt={project.imageAlt}
+							href={project.href || project.imageSrc}
 						/>
 					))
 				}
@@ -286,7 +320,14 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 				</div>
 
 				<!-- QR Code Modals -->
-				<div id="qr-modal" class="qr-modal" style="display: none;">
+				<div
+					id="qr-modal"
+					class="qr-modal"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby="qr-title"
+					style="display: none;"
+				>
 					<div class="qr-modal-overlay"></div>
 					<div class="qr-modal-content">
 						<button class="qr-modal-close" aria-label="Close">
@@ -307,19 +348,23 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 				</div>
 			</section>
 
-			{t.cvLink && (
-				<section id="cv" class="section section-alt cv-section">
-					<div class="container cv-inner">
-						<div class="cv-copy">
-							<h2 class="section-title">{t.cvTitle}</h2>
-							{t.cvText && <p class="section-text">{t.cvText}</p>}
+			{
+				t.cvLink && (
+					<section id="cv" class="section section-alt cv-section">
+						<div class="container cv-inner">
+							<div class="cv-copy">
+								<h2 class="section-title">{t.cvTitle}</h2>
+								{t.cvText && (
+									<p class="section-text">{t.cvText}</p>
+								)}
+							</div>
+							<a class="btn primary" href={t.cvLink} download>
+								{t.cvButtonLabel}
+							</a>
 						</div>
-						<a class="btn primary" href={t.cvLink} download>
-							{t.cvButtonLabel}
-						</a>
-					</div>
-				</section>
-			)}
+					</section>
+				)
+			}
 		</main>
 
 		<script is:inline define:vars={{ t }}>
@@ -330,15 +375,18 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 				);
 
 				revealButtons.forEach((button) => {
+					// Initialize aria-expanded
+					button.setAttribute("aria-expanded", "false");
+
 					button.addEventListener("click", () => {
 						const contactType = button.getAttribute("data-contact");
 						const valueDiv = document.querySelector(
 							`[data-value="${contactType}"]`,
 						);
-						const label = button.querySelector(".contact-label");
 
 						if (valueDiv.style.display === "none") {
 							valueDiv.style.display = "block";
+							button.setAttribute("aria-expanded", "true");
 							button.style.display = "none";
 						}
 					});
@@ -352,6 +400,15 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 				const qrImage = document.getElementById("qr-image");
 				const qrTitle = document.getElementById("qr-title");
 
+				let lastFocusedElement = null;
+
+				// Focus trap elements
+				const getFocusableElements = () => {
+					return modal.querySelectorAll(
+						'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+					);
+				};
+
 				qrButtons.forEach((button) => {
 					button.addEventListener("click", () => {
 						const qrType = button.getAttribute("data-qr");
@@ -364,14 +421,28 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 							qrTitle.textContent = t.qrModalTitleTelegram;
 						}
 
+						// Store the element that triggered the modal
+						lastFocusedElement = button;
+
 						modal.style.display = "flex";
 						document.body.style.overflow = "hidden";
+
+						// Focus the close button
+						setTimeout(() => {
+							closeBtn.focus();
+						}, 100);
 					});
 				});
 
 				const closeModal = () => {
 					modal.style.display = "none";
 					document.body.style.overflow = "";
+
+					// Restore focus to the element that opened the modal
+					if (lastFocusedElement) {
+						lastFocusedElement.focus();
+						lastFocusedElement = null;
+					}
 				};
 
 				closeBtn.addEventListener("click", closeModal);
@@ -381,6 +452,30 @@ const projects = Array.isArray((t as any).projects) ? (t as any).projects : [];
 				document.addEventListener("keydown", (e) => {
 					if (e.key === "Escape" && modal.style.display === "flex") {
 						closeModal();
+					}
+				});
+
+				// Focus trap
+				modal.addEventListener("keydown", (e) => {
+					if (e.key === "Tab" && modal.style.display === "flex") {
+						const focusableElements = getFocusableElements();
+						const firstElement = focusableElements[0];
+						const lastElement =
+							focusableElements[focusableElements.length - 1];
+
+						if (e.shiftKey) {
+							// Shift + Tab
+							if (document.activeElement === firstElement) {
+								e.preventDefault();
+								lastElement.focus();
+							}
+						} else {
+							// Tab
+							if (document.activeElement === lastElement) {
+								e.preventDefault();
+								firstElement.focus();
+							}
+						}
 					}
 				});
 			});

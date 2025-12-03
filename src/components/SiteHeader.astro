@@ -5,11 +5,13 @@ const {
 	transparent = false,
 	currentLang = "en",
 } = Astro.props;
+
+const homeHref = currentLang === "fr" ? "/fr/" : "/";
 ---
 
 <header class:list={["site-header", { "is-transparent": transparent }]}>
 	<div class="container header-content">
-		<a href="/" class="logo" aria-label={logoLabel}>
+		<a href={homeHref} class="logo" aria-label={logoLabel}>
 			<img src="/images/logo.svg" alt={logoLabel} />
 		</a>
 		{
@@ -35,7 +37,7 @@ const {
 				EN
 			</a>
 			<a
-				href="/fr"
+				href="/fr/"
 				class:list={[
 					"lang-link",
 					{ "is-active": currentLang === "fr" },
