@@ -152,7 +152,8 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 				</div>
 			</section>
 
-				<section id="projects" class="project-showcase">
+			<section id="projects" class="project-showcase">
+				<h2 class="sr-only">{t.projectsTitle}</h2>
 				{
 					projects.map((project: any) => (
 						<Project
@@ -162,7 +163,7 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 							tags={project.tags}
 							imageSrc={project.imageSrc}
 							imageAlt={project.imageAlt}
-							href={project.href || project.imageSrc}
+							href={project.href}
 						/>
 					))
 				}
