@@ -4,30 +4,35 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 Astro.response.status = 404;
 
-const isFr = Astro.url?.pathname.startsWith("/fr");
-const t = isFr
-	? {
-			lang: "fr",
-			metaTitle: "404 – Page non trouvée | Adilie",
-			metaDescription:
-				"La page que vous cherchez n'existe pas ou a été déplacée.",
-			title: "Page non trouvée",
-			text: "La page que vous cherchez n'existe pas ou a été déplacée.",
-			back: "Retour à l'accueil",
-			homeHref: "/fr/",
-			currentLang: "fr",
-	  }
-	: {
-			lang: "en",
-			metaTitle: "404 – Page not found | Adilie",
-			metaDescription:
-				"The page you’re looking for doesn’t exist or has been moved.",
-			title: "Page not found",
-			text: "The page you’re looking for doesn’t exist, or has been moved.",
-			back: "Back to home",
-			homeHref: "/",
-			currentLang: "en",
-	  };
+const translations = {
+	fr: {
+		lang: "fr",
+		metaTitle: "404 – Page non trouvée | Adilie",
+		metaDescription:
+			"La page que vous cherchez n'existe pas ou a été déplacée.",
+		title: "Page non trouvée",
+		text: "La page que vous cherchez n'existe pas ou a été déplacée.",
+		back: "Retour à l'accueil",
+		homeHref: "/fr/",
+		currentLang: "fr",
+	},
+	en: {
+		lang: "en",
+		metaTitle: "404 – Page not found | Adilie",
+		metaDescription:
+			"The page you’re looking for doesn’t exist or has been moved.",
+		title: "Page not found",
+		text: "The page you’re looking for doesn’t exist, or has been moved.",
+		back: "Back to home",
+		homeHref: "/",
+		currentLang: "en",
+	},
+};
+
+// During a static build, Astro renders /404 once (English). We switch
+// to French on the client when the requested path is under /fr.
+const langFromPath = Astro.url?.pathname.startsWith("/fr") ? "fr" : "en";
+const t = translations[langFromPath];
 ---
 
 <!doctype html>
@@ -37,8 +42,12 @@ const t = isFr
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{t.metaTitle}</title>
-		<meta name="description" content={t.metaDescription} />
+		<title data-404-meta-title>{t.metaTitle}</title>
+		<meta
+			name="description"
+			content={t.metaDescription}
+			data-404-meta-description
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -51,12 +60,62 @@ const t = isFr
 
 		<main class="section page-404-main">
 			<div class="container page-404-content">
-				<h1 class="section-title">{t.title}</h1>
-				<p class="section-text">{t.text}</p>
+				<h1 class="section-title" data-404-title>
+					{t.title}
+				</h1>
+				<p class="section-text" data-404-text>
+					{t.text}
+				</p>
 				<p>
-					<a href={t.homeHref} class="btn primary">{t.back}</a>
+					<a href={t.homeHref} class="btn primary" data-404-back>
+						{t.back}
+					</a>
 				</p>
 			</div>
 		</main>
+
+		<script is:inline>
+			window.addEventListener("DOMContentLoaded", () => {
+				const translations = {JSON.stringify(translations)};
+				const isFrPath =
+					typeof window !== "undefined" &&
+					/^\/fr(\/|$)/.test(window.location.pathname);
+
+				if (!isFrPath) return;
+
+				const t = translations.fr;
+				document.documentElement.lang = t.lang;
+				document.title = t.metaTitle;
+
+				const descMeta = document.querySelector(
+					'meta[name="description"]',
+				);
+				if (descMeta) descMeta.setAttribute("content", t.metaDescription);
+
+				const titleEl = document.querySelector("[data-404-title]");
+				if (titleEl) titleEl.textContent = t.title;
+
+				const textEl = document.querySelector("[data-404-text]");
+				if (textEl) textEl.textContent = t.text;
+
+				const backLink = document.querySelector("[data-404-back]");
+				if (backLink) {
+					backLink.textContent = t.back;
+					backLink.setAttribute("href", t.homeHref);
+				}
+
+				const logoLink = document.querySelector(".logo");
+				if (logoLink) logoLink.setAttribute("href", t.homeHref);
+
+				document
+					.querySelectorAll(".lang-link")
+					.forEach((link) =>
+						link.classList.toggle(
+							"is-active",
+							link.getAttribute("href") === "/fr/",
+						),
+					);
+			});
+		</script>
 	</body>
 </html>
