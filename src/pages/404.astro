@@ -33,6 +33,7 @@ const translations = {
 // to French on the client when the requested path is under /fr.
 const langFromPath = Astro.url?.pathname.startsWith("/fr") ? "fr" : "en";
 const t = translations[langFromPath];
+const translationsJson = JSON.stringify(translations).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -74,48 +75,43 @@ const t = translations[langFromPath];
 			</div>
 		</main>
 
-		<script is:inline>
-			window.addEventListener("DOMContentLoaded", () => {
-				const translations = {JSON.stringify(translations)};
-				const isFrPath =
-					typeof window !== "undefined" &&
-					/^\/fr(\/|$)/.test(window.location.pathname);
+		<script
+			is:inline
+			set:html={`window.addEventListener("DOMContentLoaded", () => {
+  const translations = ${translationsJson};
+  const isFrPath =
+    typeof window !== "undefined" && /^\\/fr(\\/|$)/.test(window.location.pathname);
 
-				if (!isFrPath) return;
+  if (!isFrPath) return;
 
-				const t = translations.fr;
-				document.documentElement.lang = t.lang;
-				document.title = t.metaTitle;
+  const t = translations.fr;
+  document.documentElement.lang = t.lang;
+  document.title = t.metaTitle;
 
-				const descMeta = document.querySelector(
-					'meta[name="description"]',
-				);
-				if (descMeta) descMeta.setAttribute("content", t.metaDescription);
+  const descMeta = document.querySelector('meta[name="description"]');
+  if (descMeta) descMeta.setAttribute("content", t.metaDescription);
 
-				const titleEl = document.querySelector("[data-404-title]");
-				if (titleEl) titleEl.textContent = t.title;
+  const titleEl = document.querySelector("[data-404-title]");
+  if (titleEl) titleEl.textContent = t.title;
 
-				const textEl = document.querySelector("[data-404-text]");
-				if (textEl) textEl.textContent = t.text;
+  const textEl = document.querySelector("[data-404-text]");
+  if (textEl) textEl.textContent = t.text;
 
-				const backLink = document.querySelector("[data-404-back]");
-				if (backLink) {
-					backLink.textContent = t.back;
-					backLink.setAttribute("href", t.homeHref);
-				}
+  const backLink = document.querySelector("[data-404-back]");
+  if (backLink) {
+    backLink.textContent = t.back;
+    backLink.setAttribute("href", t.homeHref);
+  }
 
-				const logoLink = document.querySelector(".logo");
-				if (logoLink) logoLink.setAttribute("href", t.homeHref);
+  const logoLink = document.querySelector(".logo");
+  if (logoLink) logoLink.setAttribute("href", t.homeHref);
 
-				document
-					.querySelectorAll(".lang-link")
-					.forEach((link) =>
-						link.classList.toggle(
-							"is-active",
-							link.getAttribute("href") === "/fr/",
-						),
-					);
-			});
-		</script>
+  document
+    .querySelectorAll(".lang-link")
+    .forEach((link) =>
+      link.classList.toggle("is-active", link.getAttribute("href") === "/fr/"),
+    );
+});`}
+		/>
 	</body>
 </html>
