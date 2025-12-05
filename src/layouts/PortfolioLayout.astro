@@ -64,8 +64,9 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 		)}
 
 		{hasSiteUrl && (
-			<script type="application/ld+json">
-				{JSON.stringify(
+			<script
+				type="application/ld+json"
+				set:html={JSON.stringify(
 					{
 						"@context": "https://schema.org",
 						"@type": "Person",
@@ -82,12 +83,13 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 					null,
 					2,
 				)}
-			</script>
+			></script>
 		)}
 
 		{hasSiteUrl && (
-			<script type="application/ld+json">
-				{JSON.stringify(
+			<script
+				type="application/ld+json"
+				set:html={JSON.stringify(
 					{
 						"@context": "https://schema.org",
 						"@type": "BreadcrumbList",
@@ -109,7 +111,7 @@ const ogImage = hasSiteUrl ? `${siteUrl}${ogImagePath}` : ogImagePath;
 					null,
 					2,
 				)}
-			</script>
+			></script>
 		)}
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
